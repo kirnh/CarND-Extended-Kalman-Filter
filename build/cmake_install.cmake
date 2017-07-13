@@ -1,4 +1,4 @@
-# Install script for directory: /home/kh/P1/CarND-Extended-Kalman-Filter-Project
+# Install script for directory: /home/kh/P1/CarND-Extended-Kalman-Filter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/kh/P1/CarND-Extended-Kalman-Filter-Project/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/kh/P1/CarND-Extended-Kalman-Filter/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
