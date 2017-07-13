@@ -20,7 +20,6 @@ FusionEKF::FusionEKF() {
   // initializing matrices
   R_laser_ = MatrixXd(2, 2);
   R_radar_ = MatrixXd(3, 3);
-  H_laser_ = MatrixXd(2, 4);
 
   //measurement covariance matrix - laser
   R_laser_ << 0.0225, 0,
@@ -36,8 +35,9 @@ FusionEKF::FusionEKF() {
     * Finish initializing the FusionEKF.
     * Set the process and measurement noises
   */
-  H_laser_ << 1, 0, 0, 0,
-          0, 1, 0, 0;
+  ekf_.F_ = MatrixXd(4, 4);
+  ekf_.Q_ = MatrixXd(4, 4);
+
 }
 
 /**
@@ -92,8 +92,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   }
 
   // Delta time using timestamp and previous_timestamp_
-  float delta_t = measurement_pack.timestamp - previous_timestamp_;
-  previous_timestamp_ = measurement_pack.timestamp;
+  float delta_t = measurement_pack.timestamp_ - previous_timestamp_;
+  previous_timestamp_ = measurement_pack.timestamp_;
 
   /*****************************************************************************
    *  Prediction
@@ -106,7 +106,21 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      * Update the process noise covariance matrix.
      * Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
    */
-    ekf_.F_ << 
+    ekf_.F_ << 1, 0, delta_t, 0,
+                            0, 1, 0, delta_t,
+                            0, 0, 1, 0,
+                            0, 0, 0, 1;
+
+    float delta_t4 = pow(delta_t, 4);
+    float delta_t3 = pow(delta_t, 3);
+    float delta_t2 = pow(delta_t, 2);
+
+    ekf_.Q_ << delta_t4/4*9, 0, delta_t3/2*9, 0,
+                              0, delta_t4/4*9, 0, delta_t3/2*9,
+                              delta_t3/2*9, 0 , delta_t2*9, 0,
+                              0, delta_t3/2*9, 0, delta_t2*9;
+    cout << "\nThe code before Predict runs--------\n";
+    ekf_.Predict();
 
   /*****************************************************************************
    *  Update
@@ -120,11 +134,14 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // Radar updates
-  } else {
+  } 
+
+  else {
     // Laser updates
   }
 
   // print the output
+  cout << "HERE--------------------";
   cout << "x_ = " << ekf_.x_ << endl;
   cout << "P_ = " << ekf_.P_ << endl;
 }
