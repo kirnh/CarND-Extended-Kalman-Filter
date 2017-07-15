@@ -115,7 +115,6 @@ int main()
     	  double p_y = fusionEKF.ekf_.x_(1);
     	  double v1  = fusionEKF.ekf_.x_(2);
     	  double v2 = fusionEKF.ekf_.x_(3);
-        cout << p_x <<" "<< p_y <<" "<< v1 <<" "<<v2;
 
     	  estimate(0) = p_x;
     	  estimate(1) = p_y;
