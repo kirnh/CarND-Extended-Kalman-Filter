@@ -24,9 +24,6 @@ void KalmanFilter::Predict() {
   TODO:
     * predict the state
   */
-  cout << x_ << "\n";
-  cout << F_<< "\n";
-  cout << "The state variables and transition matrix are fine------";
   x_ = F_ * x_;
   MatrixXd Ft = F_.transpose();
   P_ = F_ * P_ * Ft + Q_;

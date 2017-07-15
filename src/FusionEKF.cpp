@@ -35,6 +35,8 @@ FusionEKF::FusionEKF() {
     * Finish initializing the FusionEKF.
     * Set the process and measurement noises
   */
+  ekf_.x_ = VectorXd(4);
+  ekf_.P_ = MatrixXd(4, 4);
   ekf_.F_ = MatrixXd(4, 4);
   ekf_.Q_ = MatrixXd(4, 4);
 
@@ -59,8 +61,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       * Remember: you'll need to convert radar from polar to cartesian coordinates.
     */
     // first measurement
-    ekf_.x_ = VectorXd(4);
-
     if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
       /**
       Convert radar from polar to cartesian coordinates and initialize state.
@@ -88,11 +88,14 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
     // done initializing, no need to predict or update
     is_initialized_ = true;
+    
+    // updating timestamp
+    previous_timestamp_ = measurement_pack.timestamp_;
     return;
   }
 
   // Delta time using timestamp and previous_timestamp_
-  float delta_t = measurement_pack.timestamp_ - previous_timestamp_;
+  float delta_t = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0;
   previous_timestamp_ = measurement_pack.timestamp_;
 
   /*****************************************************************************
@@ -107,19 +110,19 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      * Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
    */
     ekf_.F_ << 1, 0, delta_t, 0,
-                            0, 1, 0, delta_t,
-                            0, 0, 1, 0,
-                            0, 0, 0, 1;
+                0, 1, 0, delta_t,
+                0, 0, 1, 0,
+                0, 0, 0, 1;
 
     float delta_t4 = pow(delta_t, 4);
     float delta_t3 = pow(delta_t, 3);
     float delta_t2 = pow(delta_t, 2);
 
     ekf_.Q_ << delta_t4/4*9, 0, delta_t3/2*9, 0,
-                              0, delta_t4/4*9, 0, delta_t3/2*9,
-                              delta_t3/2*9, 0 , delta_t2*9, 0,
-                              0, delta_t3/2*9, 0, delta_t2*9;
-    cout << "\nThe code before Predict runs--------\n";
+                0, delta_t4/4*9, 0, delta_t3/2*9,
+                delta_t3/2*9, 0 , delta_t2*9, 0,
+                0, delta_t3/2*9, 0, delta_t2*9;
+    
     ekf_.Predict();
 
   /*****************************************************************************
