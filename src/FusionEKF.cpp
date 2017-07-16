@@ -44,7 +44,6 @@ FusionEKF::FusionEKF() {
   ekf_.P_ = MatrixXd(4, 4);
   ekf_.F_ = MatrixXd(4, 4);
   ekf_.Q_ = MatrixXd(4, 4);
-
 }
 
 /**
@@ -90,6 +89,12 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     // Initialize velocities to 0
     ekf_.x_[2] = 0;
     ekf_.x_[3] = 0;
+
+    // Initialize the state uncertainty matrix (we are more uncertain about our velocities)
+    ekf_.P_ << 1, 0, 0, 0,
+          0, 1, 0, 0,
+          0, 0, 100, 0,
+          0, 0, 0, 100;
 
     // done initializing, no need to predict or update
     is_initialized_ = true;
