@@ -56,15 +56,15 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   */
   // Mapping the predicted state variables into the measurement space of radar
   VectorXd z_pred(3);
-  float ro_pred = pow((pow(x_(0), 2)+pow(x_(1), 2)), 0.5); // sqrt(px^2+py^2)
+  double ro_pred = pow((pow(x_(0), 2)+pow(x_(1), 2)), 0.5); // sqrt(px^2+py^2)
   if (x_(0) == 0){
   	cout << "Division by zero error while calculating theta_pred!" << endl;
   }
-  float theta_pred = atan(x_(1)/x_(0)); // arctan(py/px)
+  double theta_pred = atan2(x_(1),x_(0)); // arctan(py/px)
   if (ro_pred == 0){
   	cout << "Division by zero error while calculating ro_dot_pred!" << endl;
   }
-  float ro_dot_pred = ((x_(0)*x_(2)+x_(1)*x_(3))/ro_pred); // px*vx+py*vy/sqrt(px^2+py^2)
+  double ro_dot_pred = ((x_(0)*x_(2)+x_(1)*x_(3))/ro_pred); // px*vx+py*vy/sqrt(px^2+py^2)
   z_pred << ro_pred, theta_pred, ro_dot_pred;
 	
 	VectorXd y = z - z_pred;
@@ -85,6 +85,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
 	//new estimate
 	x_ = x_ + (K * y);
+
 	long x_size = x_.size();
 	MatrixXd I = MatrixXd::Identity(x_size, x_size);
 	P_ = (I - K * H_) * P_;

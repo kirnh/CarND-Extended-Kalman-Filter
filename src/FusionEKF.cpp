@@ -73,8 +73,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       float ro = measurement_pack.raw_measurements_[0];
       float theta = measurement_pack.raw_measurements_[1];
 
-      float px = ro * sin(theta);
-      float py = ro * cos(theta);
+      float px = ro * cos(theta);
+      float py = ro * sin(theta);
 
       ekf_.x_[0] = px;
       ekf_.x_[1] = py;
@@ -150,7 +150,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     ekf_.H_ = Hj_;
 
     // Call the EKF update function
-    ekf_.UpdateEKF(measurement_pack.raw_measurements_);
+    // ekf_.UpdateEKF(measurement_pack.raw_measurements_);
   } 
 
   else {
