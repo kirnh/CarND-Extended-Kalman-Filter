@@ -119,11 +119,11 @@ $(document).ready(function () {
 </div>
 
 
-<div id="extended-kalman-filter-project-starter-code" class="section level1">
-<h1>Extended Kalman Filter Project Starter Code</h1>
+<div id="extended-kalman-filter-project" class="section level1">
+<h1>Extended Kalman Filter Project</h1>
 <p>Self-Driving Car Engineer Nanodegree Program</p>
-<p>In this project you will utilize a kalman filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric.</p>
-<p>This project involves the Term 2 Simulator which can be downloaded <a href="https://github.com/udacity/self-driving-car-sim/releases">here</a></p>
+<p>In this project we will utilize a kalman filter to estimate the state of a moving object of interest with noisy lidar and radar measurements.</p>
+<p>This project involves the Term 2 Simulator which can be downloaded <a href="https://github.com/udacity/self-driving-car-sim/releases">here</a> This simulator is what will provide our code with data to process.</p>
 <p>This repository includes two files that can be used to set up and install <a href="https://github.com/uWebSockets/uWebSockets">uWebSocketIO</a> for either Linux or Mac systems. For windows you can use either Docker, VMware, or even <a href="https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/">Windows 10 Bash on Ubuntu</a> to install uWebSocketIO. Please see <a href="https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/16cf4a78-4fc7-49e1-8621-3450ca938b77">this concept in the classroom</a> for the required version and installation scripts.</p>
 <p>Once the install for uWebSocketIO is complete, the main program can be built and run by doing the following from the project top directory.</p>
 <ol style="list-style-type: decimal">
@@ -133,8 +133,6 @@ $(document).ready(function () {
 <li>make</li>
 <li>./ExtendedKF</li>
 </ol>
-<p>Note that the programs that need to be written to accomplish the project are src/FusionEKF.cpp, src/FusionEKF.h, kalman_filter.cpp, kalman_filter.h, tools.cpp, and tools.h</p>
-<p>The program main.cpp has already been filled out, but feel free to modify it.</p>
 <p>Here is the main protcol that main.cpp uses for uWebSocketIO in communicating with the simulator.</p>
 <p>INPUT: values provided by the simulator to the c++ program</p>
 <p>[“sensor_measurement”] =&gt; the measurement that the simulator observed (either lidar or radar)</p>
@@ -169,46 +167,7 @@ $(document).ready(function () {
 <ol start="4" style="list-style-type: decimal">
 <li>Run it: <code>./ExtendedKF</code></li>
 </ol>
-</div>
-<div id="editor-settings" class="section level2">
-<h2>Editor Settings</h2>
-<p>We’ve purposefully kept editor configuration files out of this repo in order to keep it as simple and environment agnostic as possible. However, we recommend using the following settings:</p>
-<ul>
-<li>indent using spaces</li>
-<li>set tab width to 2 spaces (keeps the matrices in source code aligned)</li>
-</ul>
-</div>
-<div id="code-style" class="section level2">
-<h2>Code Style</h2>
-<p>Please (do your best to) stick to <a href="https://google.github.io/styleguide/cppguide.html">Google’s C++ style guide</a>.</p>
-</div>
-<div id="generating-additional-data" class="section level2">
-<h2>Generating Additional Data</h2>
-<p>This is optional!</p>
-<p>If you’d like to generate your own radar and lidar data, see the <a href="https://github.com/udacity/CarND-Mercedes-SF-Utilities">utilities repo</a> for Matlab scripts that can generate additional data.</p>
-</div>
-<div id="project-instructions-and-rubric" class="section level2">
-<h2>Project Instructions and Rubric</h2>
-<p>Note: regardless of the changes you make, your project must be buildable using cmake and make!</p>
-<p>More information is only accessible by people who are already enrolled in Term 2 of CarND. If you are enrolled, see <a href="https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/382ebfd6-1d55-4487-84a5-b6a5a4ba1e47">the project resources page</a> for instructions and the project rubric.</p>
-</div>
-<div id="hints" class="section level2">
-<h2>Hints!</h2>
-<ul>
-<li>You don’t have to follow this directory structure, but if you do, your work will span all of the .cpp files here. Keep an eye out for TODOs.</li>
-</ul>
-</div>
-<div id="call-for-ide-profiles-pull-requests" class="section level2">
-<h2>Call for IDE Profiles Pull Requests</h2>
-<p>Help your fellow students!</p>
-<p>We decided to create Makefiles with cmake to keep this project as platform agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure that students don’t feel pressured to use one IDE or another.</p>
-<p>However! We’d love to help people get up and running with their IDEs of choice. If you’ve created a profile for an IDE that you think other students would appreciate, we’d love to have you add the requisite profile files and instructions to ide_profiles/. For example if you wanted to add a VS Code profile, you’d add:</p>
-<ul>
-<li>/ide_profiles/vscode/.vscode</li>
-<li>/ide_profiles/vscode/README.md</li>
-</ul>
-<p>The README should explain what the profile does, how to take advantage of it, and how to install it.</p>
-<p>Regardless of the IDE used, every submitted project must still be compilable with cmake and make.</p>
+<p>**Make sure to run the Simulator alongside the Extended Kalman filter scripts.</p>
 </div>
 </div>
 
